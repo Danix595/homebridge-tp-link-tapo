@@ -63,7 +63,8 @@ export default class LegacyAPI extends API {
         },
         httpAgent: new http.Agent({
           keepAlive: false
-        })
+        }),
+        timeout: 5000
       }
     );
 
@@ -110,7 +111,8 @@ export default class LegacyAPI extends API {
           },
           httpAgent: new http.Agent({
             keepAlive: false
-          })
+          }),
+          timeout: 5000
         }
       );
   

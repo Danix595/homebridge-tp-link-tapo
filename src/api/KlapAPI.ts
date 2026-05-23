@@ -261,7 +261,8 @@ export default class KlapAPI extends API {
       },
       httpAgent: new http.Agent({
         keepAlive: false
-      })
+      }),
+      timeout: 5000
     });
   }
 

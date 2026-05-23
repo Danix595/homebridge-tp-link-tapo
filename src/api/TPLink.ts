@@ -122,7 +122,12 @@ export default class TPLink {
         return this.infoCache.data;
       }
 
-      const deviceInfo = (await this.sendCommand('deviceInfo')) ?? {};
+      const deviceInfo = await this.sendCommand('deviceInfo');
+      
+      if (!deviceInfo || Object.keys(deviceInfo).length === 0) {
+        throw new Error('Failed to get device info (device offline or unreachable)');
+      }
+      
       this.infoCache = {
         data: deviceInfo,
         setAt: Date.now()
@@ -142,9 +147,12 @@ export default class TPLink {
         return this.childInfoCache[childId.toString()].data;
       }
 
-      const rawInfo =
-        (await this.sendCommand('childDeviceInfo', childId)) ?? {};
-      const deviceInfo = rawInfo?.responseData?.result ?? {};
+      const rawInfo = await this.sendCommand('childDeviceInfo', childId);
+      const deviceInfo = rawInfo?.responseData?.result;
+
+      if (!deviceInfo || Object.keys(deviceInfo).length === 0) {
+        throw new Error('Failed to get child device info (device offline or unreachable)');
+      }
 
       this.childInfoCache[childId.toString()] = {
         data: deviceInfo,

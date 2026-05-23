@@ -51,9 +51,9 @@ export default class Platform implements DynamicPlatformPlugin {
     });
   }
 
-  configureAccessory(accessory: PlatformAccessory<Context>) {
+  configureAccessory(accessory: PlatformAccessory) {
     this.log.info('Loading accessory from cache:', accessory.displayName);
-    this.accessories.push(accessory);
+    this.accessories.push(accessory as unknown as PlatformAccessory<Context | HubContext>);
   }
 
   private async discoverDevices() {
@@ -126,11 +126,6 @@ export default class Platform implements DynamicPlatformPlugin {
     try {
       const tpLink = await new TPLink(ip, email, password, this.log).setup();
       const deviceInfo = await tpLink.getInfo();
-      if (Object.keys(deviceInfo || {}).length === 0) {
-        this.log.error('Failed to get info about:', ip);
-        this.deviceRetry[uuid] -= 1;
-        return await this.loadDevice(ip, email, password);
-      }
 
       const deviceName = Buffer.from(
         deviceInfo?.nickname || 'Tm8gTmFtZQ==',

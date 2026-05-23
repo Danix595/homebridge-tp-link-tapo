@@ -6,4 +6,4 @@ export const PLATFORM_NAME = 'HomebridgeTPLinkTapo';
 /**
  * This must match the name of your plugin as defined the package.json
  */
-export const PLUGIN_NAME = 'homebridge-tp-link-tapo';
+export const PLUGIN_NAME = 'homebridge-tp-link-tapo-updated';
