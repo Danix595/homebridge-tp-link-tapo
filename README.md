@@ -1,12 +1,5 @@
 # Homebridge TP-Link Tapo (Updated & Maintained Fork)
 
-[![Build and Lint](https://github.com/Danix595/homebridge-tp-link-tapo/actions/workflows/build.yml/badge.svg)](https://github.com/Danix595/homebridge-tp-link-tapo/actions/workflows/build.yml)
-[![CodeQL](https://github.com/Danix595/homebridge-tp-link-tapo/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Danix595/homebridge-tp-link-tapo/actions/workflows/codeql-analysis.yml)
-
-[![verified-by-homebridge](https://badgen.net/badge/homebridge/verified/purple)](https://github.com/homebridge/homebridge/wiki/Verified-Plugins)
-![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/homebridge-tp-link-tapo-updated)
-![npm](https://img.shields.io/npm/dm/homebridge-tp-link-tapo-updated)
-
 This is an **actively maintained fork** of the original `homebridge-tp-link-tapo` plugin, which was archived by its author.
 
 ### What's new in this fork?
@@ -23,11 +16,6 @@ If you are coming from the original plugin, you must install this new updated pa
 **Using the Homebridge UI:**
 Search for `homebridge-tp-link-tapo-updated` in the Plugins tab and click install.
 
-**Using Terminal:**
-```bash
-npm install -g homebridge-tp-link-tapo-updated
-```
-
 ### Current device types
 
 - Socket/Outlet (For devices with power measurement, they have a contact sensor, open means the current is > 0 and closed is 0)
@@ -42,7 +30,6 @@ For other device types, just open an issue on the GitHub repository.
 ### Config
 
 You can add multiple devices with a single platform configuration.
-Make sure the platform name is strictly set to `HomebridgeTPLinkTapo` or `homebridge-tp-link-tapo-updated`.
 
 ```json
 {
