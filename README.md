@@ -1,24 +1,32 @@
-# Homebridge TP-Link Tapo
+# Homebridge TP-Link Tapo (Updated & Maintained Fork)
 
-## This plugin has been archived and it will no longer receive updates
-
-[![Build and Lint](https://github.com/RaresAil/homebridge-tp-link-tapo/actions/workflows/build.yml/badge.svg)](https://github.com/RaresAil/homebridge-tp-link-tapo/actions/workflows/build.yml)
-[![CodeQL](https://github.com/RaresAil/homebridge-tp-link-tapo/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/RaresAil/homebridge-tp-link-tapo/actions/workflows/codeql-analysis.yml)
+[![Build and Lint](https://github.com/Danix595/homebridge-tp-link-tapo/actions/workflows/build.yml/badge.svg)](https://github.com/Danix595/homebridge-tp-link-tapo/actions/workflows/build.yml)
+[![CodeQL](https://github.com/Danix595/homebridge-tp-link-tapo/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Danix595/homebridge-tp-link-tapo/actions/workflows/codeql-analysis.yml)
 
 [![verified-by-homebridge](https://badgen.net/badge/homebridge/verified/purple)](https://github.com/homebridge/homebridge/wiki/Verified-Plugins)
-![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/homebridge-tp-link-tapo)
-![npm](https://img.shields.io/npm/dm/homebridge-tp-link-tapo)
+![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/homebridge-tp-link-tapo-updated)
+![npm](https://img.shields.io/npm/dm/homebridge-tp-link-tapo-updated)
 
-I recommend to use the platform as a Child Bridge for the best performance.
+This is an **actively maintained fork** of the original `homebridge-tp-link-tapo` plugin, which was archived by its author.
 
-Most of the time the response time between the app and the device is 80ms.
-With the official app i measured around 1s to 2s as a response time.
+### What's new in this fork?
+- **Stability Fixes:** Fixed severe Homebridge crashing/hanging issues caused by TP-Link devices disconnecting from the network or changing IP addresses. HTTP requests now properly time out and gracefully report devices as "No Response" natively in HomeKit.
+- **Homebridge v2 Ready:** Fully compatible with Homebridge v2 and Node.js v24+. 
+- **Clean Dependencies:** Addressed critical vulnerabilities in older dependencies.
 
-### Migrate to V3
+I recommend using the platform as a Child Bridge for the best performance. Most of the time the response time between the app and the device is ~80ms (much faster than the official app).
 
-The platform name was changed to `HomebridgeTPLinkTapo` from HomebridgeTPLinkLights
+### Installation
 
-Package was renamed from `homebridge-tplink-smart-light` to `homebridge-tp-link-tapo`
+If you are coming from the original plugin, you must install this new updated package.
+
+**Using the Homebridge UI:**
+Search for `homebridge-tp-link-tapo-updated` in the Plugins tab and click install.
+
+**Using Terminal:**
+```bash
+npm install -g homebridge-tp-link-tapo-updated
+```
 
 ### Current device types
 
@@ -29,11 +37,12 @@ Package was renamed from `homebridge-tplink-smart-light` to `homebridge-tp-link-
 - Light Bulb
 - LED Strip
 
-For other device type just open a issue.
+For other device types, just open an issue on the GitHub repository.
 
 ### Config
 
-You can add multiple devices bulbs with a single platform.
+You can add multiple devices with a single platform configuration.
+Make sure the platform name is strictly set to `HomebridgeTPLinkTapo` or `homebridge-tp-link-tapo-updated`.
 
 ```json
 {
