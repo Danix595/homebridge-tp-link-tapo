@@ -269,6 +269,7 @@ export default class TPLink {
           if (`${body.error_code}` === '-1301') {
             this.tryResendCommand = true;
             this.log.info('Rate limit exceeded. Renewing session.');
+            await new Promise((resolve) => setTimeout(resolve, 1000));
             return this.sendCommandWithNoLock(command, args, isDeviceOn);
           }
         }

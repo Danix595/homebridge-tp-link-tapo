@@ -64,7 +64,7 @@ export default class LegacyAPI extends API {
         httpAgent: new http.Agent({
           keepAlive: false
         }),
-        timeout: 5000
+        timeout: 2000
       }
     );
 
@@ -112,7 +112,7 @@ export default class LegacyAPI extends API {
           httpAgent: new http.Agent({
             keepAlive: false
           }),
-          timeout: 5000
+          timeout: 2000
         }
       );
   
@@ -131,6 +131,12 @@ export default class LegacyAPI extends API {
       if(error.response?.status === 403 && !forceHandshake) {
         this.log.warn("Forbidden. Redoing the request with a token regeneration.");
         return this.sendSecureRequest(method, params, useToken, true);
+      }
+      if(error.response?.status === 429) {
+        return {
+          response: error.response,
+          body: { error_code: -1301 }
+        };
       }
       throw new Error(`Request failed: ${error}`);
     }

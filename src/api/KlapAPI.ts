@@ -84,6 +84,12 @@ export default class KlapAPI extends API {
         this.log.warn("[KLAP] Forbidden. Redoing the request with a token regeneration.");
         return this.sendSecureRequest(method, params, _, true);
       }
+      if(error.response?.status === 429) {
+        return {
+          response: error.response,
+          body: { error_code: -1301 }
+        };
+      }
       throw new Error(`[KLAP] Request failed: ${error}`);
     }
   }
@@ -262,7 +268,7 @@ export default class KlapAPI extends API {
       httpAgent: new http.Agent({
         keepAlive: false
       }),
-      timeout: 5000
+      timeout: 2000
     });
   }
 
