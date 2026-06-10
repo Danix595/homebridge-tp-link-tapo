@@ -35,6 +35,7 @@ export default class TPLink {
 
   private _prevPowerState = false;
   private _unsentData: any = {};
+  private offlineUntil = 0;
 
   private commandCache: Record<
     string,
@@ -203,6 +204,10 @@ export default class TPLink {
     args: Parameters<Commands[T]>,
     isDeviceOn = false
   ): Promise<CommandReturnType<T>> {
+    if (Date.now() < this.offlineUntil) {
+      return null as CommandReturnType<T>;
+    }
+
     try {
       if (!commands[command.toString()]) {
         return false as CommandReturnType<T>;
@@ -280,7 +285,12 @@ export default class TPLink {
       this.tryResendCommand = false;
       return (body?.result ?? body?.error_code === 0) as CommandReturnType<T>;
     } catch (e: any) {
-      this.log.error('Error sending command:', command, e);
+      if (e.message?.includes('timeout') || e.message?.includes('EHOSTUNREACH') || e.message?.includes('ECONNREFUSED')) {
+        this.offlineUntil = Date.now() + 10000;
+        this.log.debug('Error sending command (device offline):', command, e.message);
+      } else {
+        this.log.error('Error sending command:', command, e);
+      }
       this.tryResendCommand = false;
       return null as CommandReturnType<T>;
     }

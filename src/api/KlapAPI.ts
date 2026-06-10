@@ -240,7 +240,7 @@ export default class KlapAPI extends API {
     } catch (e: any) {
       this.log.error(
         '[KLAP] Second handshake failed:',
-        e.response.data || e.message
+        e.response?.data || e.message
       );
     }
 
